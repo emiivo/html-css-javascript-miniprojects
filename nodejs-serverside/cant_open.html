@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 laboratorinis</title>
+    <style>
+        body {
+            margin: 20px;
+        }
+
+        .directory {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fileTree">
+        <div class="directory" data-depth="1" data-name="root">
+            Directory: <input type="text" class="dirName" id="dirNameInput" />
+            <button onclick="addSubdirectory(this)">Add subdirectory</button>
+            <button onclick="addFile(this)">Add file</button>
+        </div>
+    </div>
+
+    <script>
+        "use strict";
+
+        function addSubdirectory(button) {
+            var directory = button.closest('.directory');
+            var depth = parseInt(directory.getAttribute('data-depth'));
+            var name = directory.getAttribute('data-name');
+            var subdirectoryCount = directory.querySelectorAll('.directory').length;
+
+            var newDir = createDirectoryElement(depth, name + '_' + subdirectoryCount);
+            directory.appendChild(newDir);
+        }
+
+        function addFile(button) {
+            var directory = button.closest('.directory');
+            var depth = parseInt(directory.getAttribute('data-depth'));
+            var name = directory.getAttribute('data-name');
+            var newFile = createFileElement();
+
+            var subdirectories = directory.querySelectorAll('.directory');
+
+            if (subdirectories.length > 0) {
+                directory.insertBefore(newFile, subdirectories[0]);
+            } else {
+                directory.appendChild(newFile);
+            }
+        }
+
+        function createDirectoryElement(depth, name) {
+            var div = document.createElement('div');
+            div.classList.add('directory');
+
+            div.setAttribute('data-depth', depth);
+            div.setAttribute('data-name', name);
+
+            var input = document.createElement('input');
+            input.setAttribute('type', 'text');
+            input.classList.add('dirName');
+            input.setAttribute('id', 'dirNameInput_' + depth);
+
+            div.appendChild(document.createTextNode('Directory: '));
+            div.appendChild(input);
+
+            var subDirButton = document.createElement('button');
+            subDirButton.textContent = 'Add subdirectory';
+            subDirButton.addEventListener('click', function () {
+                addSubdirectory(subDirButton);
+            });
+            div.appendChild(subDirButton);
+
+            var fileButton = document.createElement('button');
+            fileButton.textContent = 'Add file';
+            fileButton.addEventListener('click', function () {
+                addFile(fileButton);
+            });
+            div.appendChild(fileButton);
+
+            return div;
+        }
+
+        function createFileElement() {
+            var div = document.createElement('div');
+
+            var fileInput = document.createElement('input');
+            fileInput.setAttribute('type', 'file');
+            fileInput.classList.add('fileInput');
+
+            div.appendChild(document.createTextNode('File: '));
+            div.appendChild(fileInput);
+
+            var fileNameSpan = document.createElement('span');
+            fileNameSpan.classList.add('fileName');
+            div.appendChild(fileNameSpan);
+
+            return div;
+        }
+    </script>
+</body>
+
+</html>
