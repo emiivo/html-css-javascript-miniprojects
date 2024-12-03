@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emilija</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>  
+    <div class="registration_header">
+        <h1>Registracija į konkursą "Laimėkite bilietus į BioInfCon!"</h1>
+        <p>Užpildykite šią registracijos formą
+        ir laimėjimo atveju mes su jumis susisieksime.</p>
+    </div>
+    <div class ="dob">
+        <label for="dob">1. Įveskite savo gimimo datą:</label>
+        <input type="date">
+    </div>
+    <div class="email">
+        <label for="email">2. Elektroninio pašto adresas:</label>
+        <input type="text" name="email"/>
+    </div>
+    <div class="education">
+        <label for="education">3. Jūsų išsilavinimas:</label><br>
+        <input type="radio" id = "pagrindinis" name="education" value="pagrindinis">
+        <label for="pagrindinis"><i>Pagrindinis</i></label><br>
+        <input type="radio" id = "aukštesnysis" name="education" value="aukštesnysis">
+        <label for="aukštesnysis"><i> Aukštesnysis</i></label><br>
+        <input type="radio" id = "stud" name="education" value="stud">
+        <label for="stud"> <i>Šiuo metu studijuoju</i></label><br>
+    </div>
+    <div class="number">
+        <form>
+            <label for="phone">4. Telefono numeris:</label>
+            <input type="tel" id="phone" name="phone" pattern="^\+370\d{8}$" placeholder="+370-XXX-XX-XXX">
+        </form>
+    </div>
+    <div class="motivation">
+        <p>5. Galiausiai, norime sužinoti apie Jus!
+        Kodėl Jūs turėtumėte laimėti šį konkursą?
+        Kas sieja Jus ir bioinformatiką?
+        Trumpai aprašykite.</p>
+        <textarea id="motyvacija" name="motyvacija" rows="4" cols="50">
+        </textarea>
+    </div>
+        <button type="submit" class="register">Registruotis</button> 
+        <div class="link_back">
+            <p>Norite grįžti atgal? <a href="pirmas_puslapis.html">
+            Spauskite čia ir sugrįšite į pradinį puslapį.</a></p>
+        </div>        
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 laboratorinis</title>
+    <style>
+        #fileInput {
+            transition: border-color 0.5s ease, background-color 0.5s ease;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tai tinklalapis, ieškantis failų šios programos direktorijoje.</h1>
+    <input type="text" id="fileInput" placeholder="Įveskite pavadinimą">
+    <button onclick="loadFile()">Rasti failą</button>
+
+    <div id="result"></div>
+
+    <script>
+        "use strict";
+
+        const fileInput = document.getElementById('fileInput');
+        const resultDiv = document.getElementById('result');
+
+        fileInput.addEventListener('input', function () {
+            fileInput.style.borderColor = '';
+            fileInput.style.backgroundColor = '';
+        });
+
+        async function loadFile() {
+            const fileName = fileInput.value.trim();
+
+            if (!fileName) {
+                fileInput.style.borderColor = 'red';
+                fileInput.style.backgroundColor = 'red';
+                return;
+            }
+
+            // Atstatyti įvesties lauko spalvas
+            fileInput.style.borderColor = '';
+            fileInput.style.backgroundColor = '';
+
+            // Patikrinti, ar yra plėtinys
+            const hasExtension = /\.\w+$/; // Taškas it vienas ar daugiau simbolių (raidžių, skaičių ir '_')
+
+            // Rasti failą, kai duodamas plėtinys
+            if (hasExtension.test(fileName)) {
+                try {
+                    const fileResponse = await getFile(`./${fileName}`);
+                    if (fileResponse) {
+                        resultDiv.innerHTML = fileResponse;
+                        return;
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+
+            // Rasti failą, kai neduodamas plėtinys (.html pirmenybė, po to .txt)
+            try {
+                const [htmlResponse, txtResponse] = await Promise.all([
+                    getFile(`./${fileName}.html`),
+                    getFile(`./${fileName}.txt`)
+                ]);
+
+                if (htmlResponse) {
+                    resultDiv.innerHTML = htmlResponse;
+                    return;
+                }
+
+                if (txtResponse) {
+                    resultDiv.innerHTML = txtResponse;
+                    return;
+                }
+            } catch (error) {
+                console.error(error);
+            }
+            // Jei toks failas nerandamas, nudažyti įvesties lauką raudonai.
+            fileInput.style.borderColor = 'red';
+            fileInput.style.backgroundColor = 'red';
+        }
+
+        function getFile(file) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    // 4 - užklausa įvykdyta, 200 - OK, 404 - not found
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            resolve(xhr.responseText);
+                        } else if (xhr.status === 404) {
+                            resolve(null);
+                        }
+                    }
+                };
+                // Inicializuoja užklausą. Tai GET užklausą failui, asinchroniška (true)
+                xhr.open('GET', file, true);
+                // Siunčia užklausą serveriui
+                xhr.send();
+            });
+        }
+    </script>
+
+</body>
+</html>

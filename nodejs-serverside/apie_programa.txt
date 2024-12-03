@@ -1,0 +1,15 @@
+Komanda, paleidžianti Node.js:
+node lab_7.js 
+
+Kaip paleisti puslapius:
+
+1) Turi grąžinti puslapį (200):
+http://localhost:3000/run_server
+
+2) Nėra leidimo skaityti failo (500):
+Visų pirma, reikia atimti leidimą skaityti: 
+chmod -r cant_open.html
+http://localhost:3000/cant_open
+
+3) Nėra tokio failo (404):
+http://localhost:3000/file.html

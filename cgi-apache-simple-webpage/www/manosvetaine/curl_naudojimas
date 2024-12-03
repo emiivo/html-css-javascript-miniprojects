@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Kaip naudoti registracijos formą su Curl įrankiu</h1>
+
+    <h2>Pavyzdžiai</h2>
+
+    <p>GET request:</p>
+    <code>
+        curl -X GET http://emilija-ivoskaite.lt/cgi-bin/process_form.cgi
+    </code> 
+
+    <p>POST request - įdėti duomenis:</p>
+
+    <code>
+        curl -X POST -d "dob=1990-01-01&email=naudotojas@naudotojas.com&education=pagrindinis&phone=%2B37012345678&motyvacija=noriu"
+        http://emilija-ivoskaite.lt/cgi-bin/process_form.cgi
+    </code>
+
+    <p>
+        PUT request - pakeisti jau esančius duomenis:
+    </p>
+    
+    <code>
+        curl -X PUT -d "dob=1990-01-01&email=naudotojas@naudotojas.com&education=pagrindinis&phone=%2B37012345678&motyvacija=noriu" 
+        http://emilija-ivoskaite.lt/cgi-bin/process_form.cgi
+    </code>
+
+    <p>
+        *Atkreipkite dėmesį, kad įrašant telefono numerį vietoje '+' simbolio reikia rašyti '%2B',
+        kadangi curl komanda kitu atveju jį nuskaitys kaip tarpo simbolį. 2B - šešioliktainis ascii simbolis '+'.<br>
+        Patartina tarpus rašyti kaip simbolį '+'.
+    </p>
+
+    <h2>Skiltys</h2>
+    <p>
+        Norint duoti programai tą pačią informaciją, kaip ir naudojantis puslapiu su Curl, reikia įvesti tokią informaciją:
+    </p>
+
+    <ul>
+        <li><strong>'dob'</strong>: Gimimo data (pvz., 1990-01-01).</li>
+        <li><strong>'email'</strong>: El. pašto adresas (e.g., naudotojas@naudotojas.com).</li>
+        <li><strong>'education'</strong>: Išsilavinimas(iš pasirinkimų pagrindinis, aukštesnysis, šiuo metu studijuoju)</li>
+        <li><strong>'phone'</strong>: Telefono numeris lietuvišku formatu '+370XXXXXXXX' (pvz., +37012345678).</li>
+        <li><strong>'motyvacija'</strong>: Dėl ko norima dalyvauti konferencijoje.</li>
+    </ul>
+
+    <h2>Atsakas</h2>
+    <p>
+        CGI programa atsakys arba sėkmingai, arba išmes klaidos pranešimą.
+    </p>
+
+    <h2>Sėkmingas atsakas:</h2>
+    <pre>
+    <code>
+        Registracija sėkminga
+        Gimimo data: 1990-01-01
+        Elektroninio pašto adresas: naudotojas@naudotojas.com
+        Išsilavinimas: vidurinis
+        Telefono numeris: +37012345678
+        Motyvacija: Noriu
+    </code>
+    </pre>
+
+    <h2>Klaidos pranešimai:</h2>
+    <pre>
+    <code>
+        Registracijos klaida:
+        Neteisingas elektroninio pasto adresas.
+        Išsilavinimas yra privalomas.
+        Privaloma parašyti savo motyvacijas.
+    </code>
+    </pre>
+
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+body {
+    background-color: rgb(129, 116, 130);
+}
+
+.site_name {
+    display: flex;
+    background-image: linear-gradient(rgb(131, 125, 181), rgb(171, 136, 197));
+    margin: 2% 20%;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    border-radius: 0.5em;
+    box-shadow: 0px 0px 20px rgb(0, 0, 0);
+}
+
+.site_description {
+    display: grid;
+    grid-template-columns: 1.5fr 3fr 1.5fr;
+    align-items: center;
+    background-image: linear-gradient(rgb(171, 136, 197), rgb(131, 125, 181));
+    border-radius: 0.5em;
+    position: relative;
+    box-shadow: 0px 0px 20px rgb(0, 0, 0);
+}
+
+.photo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: rgb(0, 48, 0);
+    font-weight: bold;
+    height: 35vw;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    border-radius: 0.5em;
+    font-size: 1.5vw;
+}
+
+.site_description:hover .photo {
+    opacity: 1;
+    background-image: url(fonas.jpg);
+    background-size: contain;
+}
+
+.description {
+    display: flex;
+    font-size: 1.5vw;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin: 0 3%;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(174, 133, 179);
+    color: white;
+    border-radius: 0.5em;
+    width: 30%;
+    padding: 1% 0;
+    margin: 1.5% 60%;
+    box-shadow: 0px 0px 20px rgb(0, 0, 0);
+    font-size: 1.5vw;
+}
+
+a:link {
+    color: black;
+}
+
+a:hover {
+    color: hotpink;
+}
+
+.footer {
+    text-align: center;
+    padding: 0;
+    background-color: rgb(131, 125, 181);
+    border-radius: 0.5em;
+    color: white;
+    font-size: 1.3vw;
+}
+
+@media (max-width: 600px) {
+    .site_name {
+        font-size: 4vw;
+
+    }
+    
+    .site_description {
+        grid-template-columns: 1fr;
+        width: 100%;
+        font-size: 5vw;
+    }
+    
+    .description, .link {
+        font-size: 2vw;
+    }
+
+    .photo {
+        height: 15vw;
+        font-size: 3vw;
+    }
+    .footer{
+        font-size: 3vw;
+    }
+}
+
+
+
+.registration_header {
+    margin-bottom: 4%;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+input[type=text], input[type=email] {
+    width: 50%;
+    padding: 15px;
+    margin: 1%;
+    display: inline-block;
+    background-image: white;
+    border-color: black;
+}
+
+.dob, .education, .email, .number, .motivation {
+    margin-left: 2%;
+    color: white;
+}
+
+input[type=radio], input[type=education] {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    margin-right: 2%;
+}
+
+input[type=tel], input[type=phone]{
+    background-image: white;
+    border-color: black;
+}
+
+.motivation textarea{
+    background-image: white;
+    border-color: black;
+}
+.register {
+    background-image: linear-gradient(rgb(171, 136, 197), rgb(131, 125, 181));
+    color: white;
+    padding: 1.3vw;
+    margin-top: 0.5vw;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.8;
+    font-size: large;
+}
+
+.register:hover {
+    opacity:1;
+}
+
+.link_back {
+    background-color: white;
+    text-align: center;
+}

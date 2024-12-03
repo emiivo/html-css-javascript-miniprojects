@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Form Validation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    form {
+      width: 300px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 5px;
+      margin-top: 5px;
+      background-color: white;
+    }
+
+    .error {
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+  <script type="text/babel">
+    const App = () => {
+      const [phoneNumber, setPhoneNumber] = React.useState('');
+      const [password, setPassword] = React.useState('');
+      const [years, setYears] = React.useState('');
+
+      const validatePhoneNumber = () => /^(\+370)\d{8}$/.test(phoneNumber);
+      const validatePassword = () => /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(password);
+      const validateYears = () => /^\d{4}$/.test(years) && parseInt(years, 10) >= 1900 && parseInt(years, 10) <= 2021;
+
+      const handlePhoneNumberChange = (e) => {
+        setPhoneNumber(e.target.value);
+      };
+
+      const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+      };
+
+      const handleYearsChange = (e) => {
+        setYears(e.target.value);
+      };
+
+      return (
+        <form>
+          <label>
+            Telefono numeris (+370XXXXXXXX):
+            <input
+              type="text"
+              value={phoneNumber}
+              onChange={handlePhoneNumberChange}
+              className={phoneNumber === '' || validatePhoneNumber() ? '' : 'error'}
+            />
+          </label>
+
+          <label>
+            Slaptažodis (turi būti bent vienas skaitmuo, didžioji ir mažoji raidės):
+            <input
+              type="text"
+              value={password}
+              onChange={handlePasswordChange}
+              className={password === '' || validatePassword() ? '' : 'error'}
+            />
+          </label>
+
+          <label>
+            Gimimo metai (1900-2021):
+            <input
+              type="text"
+              value={years}
+              onChange={handleYearsChange}
+              className={years === '' || validateYears() ? '' : 'error'}
+            />
+          </label>
+        </form>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+
+</body>
+
+</html>

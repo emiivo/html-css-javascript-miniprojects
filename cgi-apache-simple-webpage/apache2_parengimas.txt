@@ -1,0 +1,24 @@
+Įdiegiau reikalingus paketus:
+	1. Gitweb
+	2. Apache2
+
+Įjungiau „Apache2“.
+
+/var/www/html/ sukūriau direktoriją manosvetainė, į kurią nukopijavau svetainės
+failus iš /home/emilija/Desktop/Emilija_svetainė/
+
+Svetainės failų nuosavybės teises pakeičiant į „www-data:www-data“ gavau tinkamus leidimus naudoti juos.
+
+Sukūriau konfigūracijos failą „myapp.conf“ direktorijoje „/etc/apache2/sites-available/“.
+
+Įjungiau konfigūraciją su komanda „sudo a2ensite myapp.conf“.
+
+Sukūriau CGI failą „process_form.cgi“ aplanke „/usr/lib/cgi-bin“.
+
+Nustačiau CGI scenarijaus vykdomuosius leidimus.
+
+Nukopijavau svetainės failus į "manosvetaine" direktoriją.
+
+Pakoregavau failų leidimus ir padariau CGI failą vykdytiną.
+
+Perkroviau „Apache2“, kad pritaikyti pakeitimus.

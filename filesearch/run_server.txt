@@ -1,0 +1,5 @@
+python3 -m http.server
+
+open html in browser: http://localhost:8000/lab_5.html
+
+(Šis failas bus naudojamas tik specifikavus plėtinį .txt)
